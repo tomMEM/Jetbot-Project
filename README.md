@@ -11,7 +11,9 @@
 
 ## 1) data_collection-Jetbot_Joystick.ipynb
 
-Modified collision_avoidance data collection Notebook from Jetbot GitHub to allow driving and steering using gamepad joystick while image acquisition by gamepad buttons.
+* Modified collision_avoidance data collection Notebook from Jetbot GitHub to allow driving and steering using gamepad joystick while image acquisition by gamepad buttons
+* Excel file: test and display two different coordinate transformation strategies
+* transfer a notebook copy to Notebooks/collision_avoidance/ of the Jetbot SD image installation
 
 ### a) Script contains: 
    * Joystick coordinate system transformation: based on user Pedro Werneck (https://electronics.stackexchange.com/questions/19669/algorithm-for-mixing-2-axis-analog-input-to-control-a-differential-motor-drive)
@@ -20,17 +22,14 @@ Modified collision_avoidance data collection Notebook from Jetbot GitHub to allo
    * gamepad buttons for image aqcuisition (free, blocked)
    * graphical buttons of orginal script remain active
 
-### b) Issues: 
-
-   * Notebook has not been clean-up (display repetitions).
-   * Scale range for motors is -0.5 to 0.5.
+### b) Issues:
+   * Notebook has not been clean-up (display repetitions)
+   * Scale range for motors is -0.5 to 0.5
    * Gamma value can be between 1-4
    * Gamepad: Xbox USB: joystick (controller.axes: x:0, y:1)
    * Image acquisition: button (5: free, 7: blocked)
-   * Inital speed restriction by …. transform=lambda x: -x/2) in the fourth cell.
-  
-   * Excel file: test different steering strategies
-  
+   * Inital speed restriction by …. transform=lambda x: -x/2) in the fourth cell 
+ 
  ## 2) Object recognition
  	* Goal: reduce time lag
 	
