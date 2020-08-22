@@ -65,7 +65,8 @@ def steering(x ,y):
  
  ## 2) Object recognition and driving towards it: live_demo-steering_tweak.ipynb
  ### Goal: reduce time lag
- ### Tweak driving towards an Object: possible at high speed towards and stationary object, following moving object is limited by the 1 s time lag
+ ### Tweak driving towards an Object: 
+ 	*Possible at high speed towards an stationary object, following a moving object is limited by the 1 s time lag and los of Object detection (increase number of non object frame, e.g. 12)
 	*Steering(x, y) has been also incorporated into live_demo-steering_tweak.ipynb to tweak steering sensitivity.
 	*The first value that needs to be adjusted is the torque of right and left motor to allow the bot going straight (offset value for left e.g. 0.04).
 	* At higher speed levels the difference between two wheels becomes lower, thus the motoradjustment_widget.value should be decreased slightly.
