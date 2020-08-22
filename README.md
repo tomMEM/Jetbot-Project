@@ -6,7 +6,7 @@
 
 ## Contents
 * [1) data_collection-Jetbot_Joystick.ipynb](#script)
-* [2) Object recognition: live_demo-steering_tweak.ipynb](#recognition)
+* [2) Object recognition and driving towards it: live_demo-steering_tweak.ipynb](#recognition)
 * [3) Adjustments](#adjusts)
 
 ## 1) data_collection-Jetbot_Joystick.ipynb
@@ -63,15 +63,19 @@ def steering(x ,y):
    * Image acquisition: button (5: free, 7: blocked)
    * Inital speed restriction by …. transform=lambda x: -x/2) in the fourth cell 
  
- ## 2) Object recognition: live_demo-steering_tweak.ipyn
+ ## 2) Object recognition and driving towards it: live_demo-steering_tweak.ipynb
  ### Goal: reduce time lag
- ### Tweak driving towards an Object
+ ### Tweak driving towards an Object: possible at high speed towards and stationary object, following moving object is limited by the 1 s time lag
 	*Steering(x, y) has been also incorporated into live_demo-steering_tweak.ipynb to tweak steering sensitivity.
 	*The first value that needs to be adjusted is the torque of right and left motor to allow the bot going straight (offset value for left e.g. 0.04).
-	*Then reduce the center_x value (no widefiled camera) e.g. center_x/4 and use a gamma value to further reduce turning strength. The y-value is fixed by speed_widget.value. The values dependent upon motors, speed and camera - takes some trial and error to tweak. Needs a formula.
-	*In case the object is not detected for a some frames, then the bot stops and is waiting for a successful detection (e.g. wait for 8 frames).
-	*Once object is reached or not detected for >8 frames the bot stops.
-	*Collision_avoidance is not active in this script
+	* At higher speed levels the difference between two wheels becomes lower, thus the motoradjustment_widget.value should be decreased slightly.
+	*The center_x value changes have to be reduced (e.g. center_x/4 worked for non widefield camera) 
+	*Gamma value (to further reduce turning strength) has to be adjusted by turn_gain_widget.value slider (2) 
+	*The y-value is fixed by the speed_widget.value. The y-value could be optained by box botton value, but changes in y value would need to be flatten.
+	*The values dependent upon motors, speed and camera, thus altering y value while driving creates steering errors (formula?).
+	*In case the object is not detected for a some frames, then the bot stops and is waiting for a successful detection (e.g. wait for 8 frames). At higher speed the bot might make a somersault due to suddenly stop.
+	*Once object is reached or not detected for >8 frames the bot stops. Since the time lag is about 1 sec, the bot might crash in the object at higher speed, use soft objects or water bottles (object 44)
+	*Collision_avoidance is not active in this script, but in case object is suddenly covered, bot stops
 	
 ## 3) Adjustments
 * High CPU usage by jetpot_stats.service if jetbot OLED display is not installed or used
