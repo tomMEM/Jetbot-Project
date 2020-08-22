@@ -17,6 +17,40 @@
 
 ### a) Script contains: 
    * Joystick coordinate system transformation: based on user Pedro Werneck (https://electronics.stackexchange.com/questions/19669/algorithm-for-mixing-2-axis-analog-input-to-control-a-differential-motor-drive)
+   ```
+def steering(x ,y):
+	# convert to polar
+	r = math.hypot(x, y)
+	t = math.atan2(y, x)
+	# rotate by 45 degrees
+	t += math.pi /-4
+	# back to cartesian
+	left = r * math.cos(t)
+	right = r * math.sin(t)
+
+	# rescale the new coords
+	left = left * math.sqrt(2)
+	right = right * math.sqrt(2)
+
+	# clamp to Min/Max
+	scalefactor= speed_widget.value # or =0.5
+	left = max(-1*scalefactor, min(left, scalefactor))
+	right = max(-1*scalefactor, min(right, scalefactor))
+
+	#gamma correction for sensitivity of joystick or x value changes while turning : TB
+	gamma=turn_gain_widget.value #or =2 joystick and 1-40 for object targeting
+	if left <0 :
+    		left= -1* (((abs(left)/scalefactor)**(1/gamma))*scalefactor)
+	else:
+    		left= ((abs(left)/scalefactor)**(1/gamma))*scalefactor
+   
+	if right <0:
+    		right= -1*(((abs(right)/scalefactor)**(1/gamma))*scalefactor)
+	else:
+    		right= ((abs(right)/scalefactor)**(1/gamma))*scalefactor
+
+	return left, right
+```
    * Gamma scaling for motor values
    * display of joystick,  left and right engine values
    * gamepad buttons for image aqcuisition (free, blocked)
@@ -55,3 +89,8 @@ $ rm /etc/systemd/system/jetbot_stats.service
 
 #if the service is required again then follow using "SD card from scratch" point 10.
 ```
+* Camera settings in camera.py:
+```gst-inspect-1.0 nvarguscamerasrc```
+
+```return 'nvarguscamerasrc sensor-mode=4 awblock=false maxperf=true wbmode=1 exposuretimerange="37000000 37000000" aeantibanding=0 ispdigitalgainrange="8 8" gainrange="8 8" ! video/x-raw(memory:NVMM), width=%d, height=%d, format=(string)NV12, framerate=(fraction)%d/1 ! nvvidconv ! video/x-raw, width=(int)%d, height=(int)%d, format=(string)BGRx ! videoconvert ! appsink' % (```
+* modify camera.py in cd /jetbot/jetbot followed by cd ..  and then sudo python3 setup.py install to transfer the modified camera.py to build
