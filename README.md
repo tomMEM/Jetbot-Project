@@ -64,7 +64,8 @@ def steering(x ,y):
  
  ## 2) Object recognition and driving towards it: live_demo-steering_tweak.ipynb
  ### Goal: reduce time lag
- ### Tweak driving towards an Object: 
+ ### Tweak driving towards an Object:
+ 	*activated collision_avoidance if the object is not found within 5-10 seconds. Using the box beside the target label to enter 0 for No search and 1 for search. need to click somewhere to activate
  	*Possible at high speed towards an stationary object, following a moving object is limited by the 1 s time lag and los of Object detection (increase number of non object frame, e.g. 12)
 	*Steering(x, y) has been also incorporated into live_demo-steering_tweak.ipynb to tweak steering sensitivity.
 	*The first value that needs to be adjusted is the torque of right and left motor to allow the bot going straight (offset value for left e.g. 0.04).
