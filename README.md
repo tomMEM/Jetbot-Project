@@ -51,17 +51,16 @@ def steering(x ,y):
 
 	return left, right
 ```
-   * Gamma scaling for motor values
-   * display of joystick,  left and right engine values
+   * Same Gamma, Speed and motoradjustment sliders for tuning of the bot to run straight, values can be used for Object following script
+   * display of joystick's left and right engine values
    * gamepad buttons for image aqcuisition (free, blocked)
-   * graphical buttons of orginal script remain active
+   * graphical buttons of the orginal script remain active and can be used
 
 ### b) Issues:
-   * Scale range for motors is -0.5 to 0.5
-   * Gamma value can be between 1-4
-   * Gamepad: Xbox USB: joystick (controller.axes: x:0, y:1)
-   * Image acquisition: button (5: free, 7: blocked)
-   * Inital speed restriction by …. transform=lambda x: -x/2) in the fourth cell 
+   * Scale range for motors is -1 to 1
+   * Gamma value can be between 0.1-4
+   * Gamepad: Xbox USB: joystick (controller.axes: x:0 (left-right, y:1 (forward-backward)
+   * Image acquisition: button (5: free, 7: blocked)   *
  
  ## 2) Object recognition and driving towards it: live_demo-steering_tweak.ipynb
  ### Goal: reduce time lag
