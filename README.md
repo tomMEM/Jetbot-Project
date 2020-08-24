@@ -2,7 +2,7 @@
 *Jetbot-Project related script*
 
 * Sources: (https://github.com/NVIDIA-AI-IOT/jetbot)
-
+* Hardware: CSI camera, basic 2 Wheel Tracing Robot car chassis, Power Bank 5V 4A (20000 OpponReno), DC Motor+Stepper Feather Wing, 3D Printed Power Bank holder, nano
 
 ## Contents
 * [1) data_collection-Jetbot_Joystick.ipynb](#script)
@@ -63,7 +63,7 @@ def steering(x ,y):
    * Image acquisition: button (5: free, 7: blocked)   *
  
  ## 2) Object recognition and driving towards it: live_demo-steering_tweak.ipynb
- ### Goal: reduce time lag
+ ### Goal: time lag
  ### Tweak driving towards an Object:
  	*activated collision_avoidance if the object is not found within 5-10 seconds. Using the box beside the target label to enter 0 for No search and 1 for search. need to click somewhere to activate
  	*Possible at high speed towards an stationary object, following a moving object is limited by the 1 s time lag and los of Object detection (increase number of non object frame, e.g. 12)
