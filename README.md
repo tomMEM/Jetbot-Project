@@ -7,7 +7,8 @@
 ## Contents
 * [1) data_collection-Jetbot_Joystick.ipynb](#script)
 * [2) Object recognition and driving towards it: live_demo-steering_tweak.ipynb](#recognition)
-* [3) Adjustments](#adjusts)
+* [3) Line following: data_collection_joystick_roadfollowing.ipynb and target Display](#roadfollowing)
+* [4) Adjustments](#adjusts)
 
 ## 1) data_collection-Jetbot_Joystick.ipynb
 
@@ -77,8 +78,12 @@ def steering(x ,y):
 	*In case the object is not detected for a some frames, then the bot stops and is waiting for a successful detection (e.g. wait for 8 frames). At higher speed the bot might make a somersault due to suddenly stop.
 	*Once object is reached or not detected for >8 frames the bot stops. Since the time lag is about 1 sec, the bot might crash in the object at higher speed, use soft objects or water bottles (object 44)
 	*Collision_avoidance is not active in this script, but in case object is suddenly covered, bot stops
-	
-## 3) Adjustments
+
+## 3)	Road Following: Scripts data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb
+  * added Joystick drive control to data_collection to learn more about the sensitivity of steering
+  * added display of generated x y coordinates in the live_demo: so far the xy coordinates are outside of the line
+  
+## 4) Adjustments
 * High CPU usage by jetpot_stats.service if jetbot OLED display is not installed or used
 ** Solution:
 ```
