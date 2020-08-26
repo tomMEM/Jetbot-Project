@@ -84,7 +84,7 @@ def steering(x ,y):
   * added display of generated x y coordinates in the live_demo: so far the xy coordinates are outside of the line
   
 ## 4) Adjustments
-* High CPU usage by jetpot_stats.service if jetbot OLED display is not installed or used
+* High CPU usage by jetpot_stats.service before 25.08.2020 if jetbot OLED display is not installed or used, new jebot Repository includes modified service
 ** Solution:
 ```
 #check if jetbot_stats.service is in the folder 
