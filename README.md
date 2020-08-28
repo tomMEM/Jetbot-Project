@@ -64,13 +64,13 @@ def steering(x ,y):
    * Image acquisition: button (5: free, 7: blocked)   *
  
  ## 2) Object recognition and driving towards it: live_demo-steering_tweak.ipynb
- ### Goal: time lag
+ 
  ### Tweak driving towards an Object:
  	*activated collision_avoidance if the object is not found within 5-10 seconds. Using the box beside the target label to enter 0 for No search and 1 for search. need to click somewhere to activate
- 	*Possible at high speed towards an stationary object, following a moving object is limited by the 1 s time lag and los of Object detection (increase number of non object frame, e.g. 12)
+ 	*Possible at high speed towards an stationary object, following a moving object is limited by the 1 s time lag and loss of Object detection (increase number of non object frame, e.g. 12)
 	*Steering(x, y) has been also incorporated into live_demo-steering_tweak.ipynb to tweak steering sensitivity.
 	*The first value that needs to be adjusted is the torque of right and left motor to allow the bot going straight (offset value for left e.g. 0.04).
-	* At higher speed levels the difference between two wheels becomes lower, thus the motoradjustment_widget.value should be decreased slightly.
+	*At higher speed levels the difference between two wheels becomes lower, thus the motoradjustment_widget.value should be decreased slightly.
 	*The center_x value changes have to be reduced (e.g. center_x/4 worked for non widefield camera) 
 	*Gamma value (to further reduce turning strength) has to be adjusted by turn_gain_widget.value slider (2) 
 	*The y-value is fixed by the speed_widget.value. The y-value could be optained by box botton value, but changes in y value would need to be flatten.
@@ -81,10 +81,11 @@ def steering(x ,y):
 
 ## 3)	Road Following: Scripts data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb
   * added Joystick drive control to data_collection to learn more about the sensitivity of steering
-  * added display of generated x y coordinates in the live_demo: so far the xy coordinates are outside of the line
+  * added display of  x y coordinates in the live_demo:
+ 
   
 ## 4) Adjustments
-* High CPU usage by jetpot_stats.service before 25.08.2020 if jetbot OLED display is not installed or used, new jebot Repository includes modified service
+* High CPU usage by jetpot_stats.service before 25.08.2020, if jetbot PIOLED display is not installed or used, the new /NVIDIA-AI-IOT/jebot Repository includes the modified service
 ** Solution:
 ```
 #check if jetbot_stats.service is in the folder 
