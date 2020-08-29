@@ -7,7 +7,7 @@
 ## Contents
 * [1) data_collection-Jetbot_Joystick.ipynb](#script)
 * [2) Object recognition and driving towards it: live_demo-steering_tweak.ipynb](#recognition)
-* [3) Line following: data_collection_joystick_roadfollowing.ipynb and target Display](#roadfollowing)
+* [3) Road following: data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb](#roadfollowing)
 * [4) Adjustments](#adjusts)
 
 ## 1) data_collection-Jetbot_Joystick.ipynb
@@ -80,8 +80,15 @@ def steering(x ,y):
 	*Collision_avoidance is not active in this script, but in case object is suddenly covered, bot stops
 
 ## 3)	Road Following: Scripts data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb
+### Camera angle should be adjusted to picture only the street and not the "horizon".
+### Seems a large number of images are required, >1000, here I tried 5000 which takes about 8 hours for the train script on the nano
+### Need to run the training road in both directions
+
   * added Joystick drive control to data_collection to learn more about the sensitivity of steering
-  * added display of  x y coordinates in the live_demo:
+  * xy coordinates from Joystick are taken to image DATA, but also x and y sliders possible to use
+  * image acquistion with gamepad button 5 while driving  several times per second
+  * added display of  x y coordinates in the live_demo: 
+  * live_demo_roadfollowing_targetdisp_driving.ipynb is using the standart steering(x,y) module, where only speed and sensitivity can be adjusted
  
   
 ## 4) Adjustments
