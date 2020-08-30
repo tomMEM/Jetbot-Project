@@ -75,9 +75,9 @@ def steering(x ,y):
 	*Gamma value (to further reduce turning strength) has to be adjusted by turn_gain_widget.value slider (2) 
 	*The y-value is fixed by the speed_widget.value. The y-value could be optained by box botton value, but changes in y value would need to be flatten.
 	*The values dependent upon motors, speed and camera, thus altering y value while driving creates steering errors (formula?).
-	*In case the object is not detected for a some frames, then the bot stops and is waiting for a successful detection (e.g. wait for 8 frames). At higher speed the bot might make a somersault due to suddenly stop.
+	*In case the object is not detected for a some frames, then the bot stops and is waiting for a successful detection (e.g. wait for 8 frames).
 	*Once object is reached or not detected for >8 frames the bot stops. Since the time lag is about 1 sec, the bot might crash in the object at higher speed, use soft objects or water bottles (object 44)
-	*Collision_avoidance is not active in this script, but in case object is suddenly covered, bot stops
+	*Collision_avoidance is now active in this script, and it is activated in case an object is not recognized within 5-10 seconds, the bot will go into search mode for an object. 
 
 ## 3)	Road Following: Scripts data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb
 ### Camera angle should be adjusted to picture only the street without the "horizon".
