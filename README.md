@@ -80,17 +80,18 @@ def steering(x ,y):
 	*Collision_avoidance is not active in this script, but in case object is suddenly covered, bot stops
 
 ## 3)	Road Following: Scripts data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb
-### Camera angle should be adjusted to picture only the street and not the "horizon".
+### Camera angle should be adjusted to picture only the street without the "horizon".
 ### Seems a large number of images are required, >1000, here I tried 5000 which takes about 8 hours for the train script on the nano
 ### Need to run the training road in both directions
 
   * added Joystick drive control to data_collection to learn more about the sensitivity of steering
-  * xy coordinates from Joystick are taken to image DATA, but also x and y sliders possible to use
-  * image acquistion with gamepad button 5 while driving  several times per second
-  * added display of  x y coordinates in the live_demo: 
-  * live_demo_roadfollowing_targetdisp_driving.ipynb is using the standart steering(x,y) module, where only speed and sensitivity can be adjusted
- 
+  * xy coordinates from the driving Joystick are taken to image names, however x and y sliders are also possible to use
+  * image acquisition with gamepad button 5 while driving  several times per second
+  * added display of x y coordinates in the camera feed of the live_demo road following script
   
+### The torch2Trt implementation from the Jetbot team greatly enhanced the performance of road following
+  * Speed up to 0.7 units are now possible, less wobbling,  (settings for non standard bot: speed 0.77, speed-gain 0.14, kd 0.31 and 0.0 )   
+
 ## 4) Adjustments
 * High CPU usage by jetpot_stats.service before 25.08.2020, if jetbot PIOLED display is not installed or used, the new /NVIDIA-AI-IOT/jebot Repository includes the modified service
 ** Solution:
