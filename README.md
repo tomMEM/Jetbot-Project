@@ -66,28 +66,29 @@ def steering(x ,y):
  ## 2) Object recognition and driving towards it: live_demo-steering_tweak.ipynb
  
  ### Tweak driving towards an Object:
- 	*activated collision_avoidance if the object is not found within 5-10 seconds. Using the box beside the target label to enter 0 for No search and 1 for search. need to click somewhere to activate
- 	*Possible at high speed towards an stationary object, following a moving object is limited by the 1 s time lag and loss of Object detection (increase number of non object frame, e.g. 12)
+ 	*Collision_avoidance is active in this script, and it is activated in case an object is not recognized within 5-10 seconds, the bot will go into search mode for an object 
+ 	*Possible at high speed towards an stationary object, following a moving object is limited by the 1 s time lag and loss of Object detection (increase number of non-object frame, e.g. 12)
 	*Steering(x, y) has been also incorporated into live_demo-steering_tweak.ipynb to tweak steering sensitivity.
 	*The first value that needs to be adjusted is the torque of right and left motor to allow the bot going straight (offset value for left e.g. 0.04).
 	*At higher speed levels the difference between two wheels becomes lower, thus the motoradjustment_widget.value should be decreased slightly.
-	*The center_x value changes have to be reduced (e.g. center_x/4 worked for non widefield camera) 
+	*The center_x value changes were reduced (e.g. center_x/4 worked for non-wide field camera) 
 	*Gamma value (to further reduce turning strength) has to be adjusted by turn_gain_widget.value slider (2) 
-	*The y-value is fixed by the speed_widget.value. The y-value could be optained by box botton value, but changes in y value would need to be flatten.
-	*The values dependent upon motors, speed and camera, thus altering y value while driving creates steering errors (formula?).
-	*In case the object is not detected for a some frames, then the bot stops and is waiting for a successful detection (e.g. wait for 8 frames).
-	*Once object is reached or not detected for >8 frames the bot stops. Since the time lag is about 1 sec, the bot might crash in the object at higher speed, use soft objects or water bottles (object 44)
-	*Collision_avoidance is now active in this script, and it is activated in case an object is not recognized within 5-10 seconds, the bot will go into search mode for an object. 
+	*The y-value is fixed by the speed_widget.value.
+	*The values dependent upon motors, speed and camera, thus altering y value while driving requires readjustments of other parameters.
+	*In case the object is not detected for a number of frames, then the bot stops and is waiting for a successful detection (e.g. wait for 8 frames).
+	*Once object is reached the bot stops. Since the time lag is about 1 sec, the bot might crash in the object at higher speed, use soft objects or water bottles (object 44)	
+
 
 ## 3)	Road Following: Scripts data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb
 ### Camera angle should be adjusted to picture only the street without the "horizon".
-### Seems a large number of images are required, >1000, here I tried 5000 which takes about 8 hours for the train script on the nano
-### Need to run the training road in both directions
+### It seems a large number of images is required, >1000, here I tried about 10000 images which took about 24 hours for the training script on the nano at MAX power
+### Need to run the training road in both directions, every 100 to 400 images the environment was altered (door, windows, lights) and new objects were placed near the training course
+### The idea is to prevent the network to orientate on certain landmarks except road labels (two blue strips)
 
-  * added Joystick drive control to data_collection to learn more about the sensitivity of steering
-  * xy coordinates from the driving Joystick are taken to image names, however x and y sliders are also possible to use
-  * image acquisition with gamepad button 5 while driving  several times per second
-  * added display of x y coordinates in the camera feed of the live_demo road following script
+  * Joystick control to drive during data_collection_road_following
+  * The xy coordinates from the driving Joystick (0,1) are taken to image names, however x and y sliders are still possible to use too
+  * The image acquisition is initiated with the gamepad button 5 while driving - it can be several times per second especially during turns
+  * The calculated xy coordinates can be observed in the camera display of the live_demo_road_following script
   
 ### The torch2Trt implementation from the Jetbot team greatly enhanced the performance of road following
   * Speed up to 0.7 units are now possible, less wobbling,  (settings for non standard bot: speed 0.77, speed-gain 0.14, kd 0.31 and 0.0 )   
