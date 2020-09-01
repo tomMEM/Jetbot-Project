@@ -80,17 +80,17 @@ def steering(x ,y):
 
 
 ## 3)	Road Following: Scripts data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb
-### Camera angle should be adjusted to picture only the street without the "horizon".
-### It seems a large number of images is required, >1000, here I tried about 10000 images which took about 24 hours for the training script on the nano at MAX power
-### Need to run the training road in both directions, every 100 to 400 images the environment was altered (door, windows, lights) and new objects were placed near the training course
-### The idea is to prevent the network to orientate on certain landmarks except road labels (two blue strips)
+ -  ### Camera angle should be adjusted to picture only the street without the "horizon".
+ -  ### It seems a large number of images is required, >1000, here I tried about 10000 images which took about 24 hours for the training script on the nano at MAX power
+ -  ### Need to run the training road in both directions, every 100 to 400 images the environment was altered (door, windows, lights) and new objects were placed near the training course
+ - ### The idea is to prevent the network to orientate on certain landmarks except road labels (two blue strips)
 
   * Joystick control to drive during data_collection_road_following
   * The xy coordinates from the driving Joystick (0,1) are taken to image names, however x and y sliders are still possible to use too
   * The image acquisition is initiated with the gamepad button 5 while driving - it can be several times per second especially during turns
   * The calculated xy coordinates can be observed in the camera display of the live_demo_road_following script
   
-### The torch2Trt implementation from the Jetbot team greatly enhanced the performance of road following
+  - ### The torch2Trt implementation from the Jetbot team greatly enhanced the performance of road following
   * Speed up to 0.7 units are now possible, less wobbling,  (settings for non standard bot: speed 0.77, speed-gain 0.14, kd 0.31 and 0.0 )   
 
 ## 4) Adjustments
