@@ -116,3 +116,6 @@ $ sudo -H rm /etc/systemd/system/jetbot_stats.service
 
 ```return 'nvarguscamerasrc sensor-mode=4 awblock=false maxperf=true wbmode=1 exposuretimerange="37000000 37000000" aeantibanding=0 ispdigitalgainrange="8 8" gainrange="8 8" ! video/x-raw(memory:NVMM), width=%d, height=%d, format=(string)NV12, framerate=(fraction)%d/1 ! nvvidconv ! video/x-raw, width=(int)%d, height=(int)%d, format=(string)BGRx ! videoconvert ! appsink' % (```
 * modify camera.py in cd /jetbot/jetbot followed by cd ..  and then sudo python3 setup.py install to transfer the modified camera.py to build
+* sync notebooks after jetbot pull from home directory (not jetbot), from user nathanperkins issue 240
+
+```rsync -avz jetbot/notebooks/ ~/Notebooks```
