@@ -107,7 +107,7 @@ $ systemctl stop jetbot_stats #start service in case: systemctl start jebot_stat
 #remove from starting at boot up
 $ systemctl disable jetbot_stats
 #delete the file
-$ rm /etc/systemd/system/jetbot_stats.service
+$ sudo -H rm /etc/systemd/system/jetbot_stats.service
 
 #if the service is required again then follow using "SD card from scratch" point 10.
 ```
