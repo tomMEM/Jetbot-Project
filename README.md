@@ -94,6 +94,12 @@ def steering(x ,y):
   * Speed up to 0.7 units are now possible, less wobbling,  (settings for non standard bot: speed 0.77, speed-gain 0.14, kd 0.31 and 0.0 )   
   * Example: motor 0.8
   ![Example road following](Gif_Demo/bot08-3.gif)
+  - ### Power Management
+  * To reduce the time lag of camera stream processing in the trt script all four CPUs are required 
+  * $sudo jetson_clocks is not sufficient to activate. $ sudo nvpmodel -m 0 for 10 W is required
+  * The preinstalled $sudo jtop can also be used to activate jetson clocks and CPUs etc..
+  * The time lag of display must be below 1 sec (<500 ms). With two CPUs at Max frequency the time lag is about < 2s which does not allow road following at an interesting speed
+
   
 ## 4) Adjustments
 * High CPU usage by jetpot_stats.service before 25.08.2020, if jetbot PIOLED display is not installed or used, the new /NVIDIA-AI-IOT/jebot Repository includes the modified service
@@ -119,3 +125,4 @@ $ sudo -H rm /etc/systemd/system/jetbot_stats.service
 * sync notebooks after jetbot pull from home directory (not jetbot), from user nathanperkins issue 240
 
 ```rsync -avz jetbot/notebooks/ ~/Notebooks```
+
