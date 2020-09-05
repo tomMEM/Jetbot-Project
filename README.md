@@ -98,7 +98,7 @@ def steering(x ,y):
   * To reduce the time lag of camera stream processing in the trt script all four CPUs are required 
   * $sudo jetson_clocks is not sufficient to activate. $ sudo nvpmodel -m 0 for 10 W is required
   * The preinstalled $sudo jtop can also be used to activate jetson clocks and CPUs etc..
-  * The time lag of display must be below 1 sec (<500 ms). With two CPUs at Max frequency the time lag is about < 2s which does not allow road following at an interesting speed
+  * The time lag of display must be below <100 ms. With two CPUs at Max frequency the time lag is about < 2s which does not allow road following at an interesting speed
 
   
 ## 4) Adjustments
