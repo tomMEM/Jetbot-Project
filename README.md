@@ -92,8 +92,7 @@ def steering(x ,y):
   
   - ### The torch2Trt implementation from the Jetbot team greatly enhanced the performance of road following
   * Speed up to 0.7 units are now possible, less wobbling,  (settings for non standard bot: speed 0.77, speed-gain 0.14, kd 0.31 and 0.0 )   
-  * Example: motor 0.8
-  ![Example road following](Gif_Demo/bot08-3.gif)
+   
   - ### Power Management
   * To reduce the time lag of camera stream processing in the trt script all four CPUs are required 
   * $sudo jetson_clocks is not sufficient to activate. $ sudo nvpmodel -m 0 for 10 W is required
