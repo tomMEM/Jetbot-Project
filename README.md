@@ -98,6 +98,7 @@ def steering(x ,y):
   * $sudo jetson_clocks is not sufficient to activate. $ sudo nvpmodel -m 0 for 10 W is required
   * The preinstalled $sudo jtop can also be used to activate jetson clocks and CPUs etc..
   * The time lag of display must be below <100 ms. With two CPUs at Max frequency the time lag is about < 2s which does not allow road following at an interesting speed
+  * example: Gif_Demo/bot08-2.mp4 roadfollowing
 
   
 ## 4) Adjustments
