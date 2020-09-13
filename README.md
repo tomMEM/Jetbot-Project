@@ -8,7 +8,8 @@
 * [1) data_collection-Jetbot_Joystick.ipynb](#script)
 * [2) Object recognition and driving towards it: live_demo-steering_tweak.ipynb](#recognition)
 * [3) Road following: data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb](#roadfollowing)
-* [4) Adjustments](#adjusts)
+* [4) Jetracer to Jetbot: data collection while driving with joystick control, but direction display](#jetracer)
+* [5) Adjustments](#adjusts)
 
 ## 1) data_collection-Jetbot_Joystick.ipynb
 
@@ -100,8 +101,12 @@ def steering(x ,y):
   * The time lag of display must be below <100 ms. With two CPUs at Max frequency the time lag is about < 2s which does not allow road following at an interesting speed
   * example: ![bot-road following link for open bot08-2.mp4](https://github.com/tomMEM/Jetbot-Project/blob/master/Gif_Demo/bot08-2.mp4)
 
-  
-## 4) Adjustments
+## 4) Jetracer to Jetbot: data collection while driving with joystick control, but direction display  
+  * only joystick control of bot and clickable display widget for coordinates
+  * allows to train for several categories
+  * live run needs still to be adjusted to work with differential drive of jetbot
+
+## 5) Adjustments
 * High CPU usage by jetpot_stats.service before 25.08.2020, if jetbot PIOLED display is not installed or used, the new /NVIDIA-AI-IOT/jebot Repository includes the modified service
 ** Solution:
 ```
