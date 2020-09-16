@@ -7,9 +7,9 @@
 
 ## Contents
 * [1) data_collection-Jetbot_Joystick.ipynb](#1-data_collection-jetbot_joystickipynb)
-* [2) Object recognition and driving towards it: live_demo-steering_tweak.ipynb](#2-object-recognition-and-driving-towards-it)
-* [3) Road following: data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb](#3-road-following)
-* [4) RoadFollowing Jetracer to Jetbot: data collection while driving with joystick control, build TRT and live run](#4-jetracer-to-jetbot)
+* [2) Object recognition and driving towards it: live_demo-steering_tweak.ipynb](#2-object-recognition-and-driving-towards-it-live_demo-steering_tweakipynb)
+* [3) Road following: data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb](#3road-following-scripts-data_collection_joystick_roadfollowingipynb-and-live_demo_roadfollowing_targetdispipynb)
+* [4) RoadFollowing Jetracer to Jetbot: data collection while driving with joystick control, build TRT and live run](#4-jetracer-to-jetbot-data-collection-while-driving-with-joystick-control-build-of-trt-and-live-run-speed-gain-fixed)
 * [5) Adjustments](#5-adjustments)
 
 ## 1) data_collection-Jetbot_Joystick.ipynb
