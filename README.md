@@ -3,7 +3,7 @@
 
 * Sources: (https://github.com/NVIDIA-AI-IOT/jetbot)
 * Hardware: CSI camera, basic 2 Wheel Tracing Robot car chassis, Power Bank 5V 4A (20000 mAh OpponReno), DC Motor+Stepper Feather Wing, 3D Printed Power Bank holder, nano
-* Clone with: git clone --depth=1 https://github.com/tomMEM/Jetbot-Project.git 
+* Clone with: git clone https://github.com/tomMEM/Jetbot-Project.git or git clone --depth=1 https://github.com/tomMEM/Jetbot-Project.git
 
 ## Contents
 * [1) data_collection-Jetbot_Joystick.ipynb](#1-data_collection-jetbot_joystickipynb)
