@@ -2,12 +2,15 @@
 *Jetbot-Project related script*
 
 * Sources: (https://github.com/NVIDIA-AI-IOT/jetbot)
-
+* Hardware: CSI camera, basic 2 Wheel Tracing Robot car chassis, Power Bank 5V 4A (20000 mAh OpponReno), DC Motor+Stepper Feather Wing, 3D Printed Power Bank holder, nano
+* Clone with: git clone https://github.com/tomMEM/Jetbot-Project.git or git clone --depth=1 https://github.com/tomMEM/Jetbot-Project.git
 
 ## Contents
-* [1) data_collection-Jetbot_Joystick.ipynb](#script)
-* [2) Object recognition](#recognition)
-* [3) Adjustments](#adjusts)
+* [1) data_collection-Jetbot_Joystick.ipynb](#1-data_collection-jetbot_joystickipynb)
+* [2) Object recognition and driving towards it: live_demo-steering_tweak.ipynb](#2-object-recognition-and-driving-towards-it-live_demo-steering_tweakipynb)
+* [3) Road following: data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb](#3road-following-scripts-data_collection_joystick_roadfollowingipynb-and-live_demo_roadfollowing_targetdispipynb)
+* [4) RoadFollowing Jetracer to Jetbot: data collection while driving with joystick control, build TRT and live run](#4-jetracer-to-jetbot-data-collection-while-driving-with-joystick-control-build-of-trt-and-live-run-speed-gain-fixed)
+* [5) Adjustments](#5-adjustments)
 
 ## 1) data_collection-Jetbot_Joystick.ipynb
 
@@ -17,24 +20,101 @@
 
 ### a) Script contains: 
    * Joystick coordinate system transformation: based on user Pedro Werneck (https://electronics.stackexchange.com/questions/19669/algorithm-for-mixing-2-axis-analog-input-to-control-a-differential-motor-drive)
-   * Gamma scaling for motor values
-   * display of joystick,  left and right engine values
+   ```
+def steering(x ,y):
+	# convert to polar
+	r = math.hypot(x, y)
+	t = math.atan2(y, x)
+	# rotate by 45 degrees
+	t += math.pi /-4
+	# back to cartesian
+	left = r * math.cos(t)
+	right = r * math.sin(t)
+
+	# rescale the new coords
+	left = left * math.sqrt(2)
+	right = right * math.sqrt(2)
+
+	# clamp to Min/Max
+	scalefactor= speed_widget.value # or =0.5
+	left = max(-1*scalefactor, min(left, scalefactor))
+	right = max(-1*scalefactor, min(right, scalefactor))
+
+	#gamma correction for sensitivity of joystick or x value changes while turning : TB
+	gamma=turn_gain_widget.value #or =2 joystick and 1-40 for object targeting
+	if left <0 :
+    		left= -1* (((abs(left)/scalefactor)**(1/gamma))*scalefactor)
+	else:
+    		left= ((abs(left)/scalefactor)**(1/gamma))*scalefactor
+   
+	if right <0:
+    		right= -1*(((abs(right)/scalefactor)**(1/gamma))*scalefactor)
+	else:
+    		right= ((abs(right)/scalefactor)**(1/gamma))*scalefactor
+
+	return left, right
+```
+   * Gamma, Speed and motoradjustment sliders for tuning of the bot to run straight, values can be used for Object following script
+   * display of joystick's left and right engine values
    * gamepad buttons for image aqcuisition (free, blocked)
-   * graphical buttons of orginal script remain active
+   * graphical buttons of the orginal script remain active and can be used
 
 ### b) Issues:
-   * Notebook has not been clean-up (display repetitions)
-   * Scale range for motors is -0.5 to 0.5
-   * Gamma value can be between 1-4
-   * Gamepad: Xbox USB: joystick (controller.axes: x:0, y:1)
-   * Image acquisition: button (5: free, 7: blocked)
-   * Inital speed restriction by …. transform=lambda x: -x/2) in the fourth cell 
+   * Scale range for motors is -1 to 1
+   * Gamma value can be between 0.1-4
+   * Gamepad: Xbox USB: joystick (controller.axes: x:0 (left-right), y:1 (forward-backward)
+   * Image acquisition: button (5: free, 7: blocked)   *
  
- ## 2) Object recognition
- 	* Goal: reduce time lag
-	
-## 3) Adjustments
-* High CPU usage by jetpot_stats.service if jetbot OLED display is not installed or used
+ ## 2) Object recognition and driving towards it: live_demo-steering_tweak.ipynb
+ 
+ ### Tweak driving towards an Object:
+ 	*Collision_avoidance is active in this script, and it is activated in case an object is not recognized within 5-10 seconds, the bot will go into search mode for an object 
+ 	*Possible at high speed towards an stationary object, following a moving object is limited by the 1 s time lag and loss of Object detection (increase number of non-object frame, e.g. 12)
+	*Steering(x, y) has been also incorporated into live_demo-steering_tweak.ipynb to tweak steering sensitivity.
+	*The first value that needs to be adjusted is the torque of right and left motor to allow the bot going straight (offset value for left e.g. 0.04).
+	*At higher speed levels the difference between two wheels becomes lower, thus the motoradjustment_widget.value should be decreased slightly.
+	*The center_x value changes were reduced (e.g. center_x/4 worked for non-wide field camera) 
+	*Gamma value (to further reduce turning strength) has to be adjusted by turn_gain_widget.value slider (2) 
+	*The y-value is fixed by the speed_widget.value.
+	*The values dependent upon motors, speed and camera, thus altering y value while driving requires readjustments of other parameters.
+	*In case the object is not detected for a number of frames, then the bot stops and is waiting for a successful detection (e.g. wait for 8 frames).
+	*Once object is reached the bot stops. Since the time lag is about 1 sec, the bot might crash in the object at higher speed, use soft objects or water bottles (object 44)	
+
+
+## 3)	Road Following: Scripts data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb
+ -  ### Camera angle should be adjusted to picture only the street without the "horizon".
+ -  ### It seems a large number of images is required, >1000, here I tried about 10000 images which took about 24 hours for the training script on the nano at MAX power
+ -  ### Need to run the training road in both directions, every 100 to 400 images the environment was altered (door, windows, lights) and new objects were placed near the training course
+ - ### The idea is to prevent the network to orientate on certain landmarks except road labels (two blue strips)
+
+  * Joystick control to drive during data_collection_road_following
+  * The xy coordinates from the driving Joystick (0,1) are taken to image names, however x and y sliders are still possible to use too
+  * The image acquisition is initiated with the gamepad button 5 while driving - it can be several times per second especially during turns
+  * The calculated xy coordinates can be observed in the camera display of the live_demo_road_following script
+  
+  - ### The torch2Trt implementation from the Jetbot team greatly enhanced the performance of road following
+  * Speed up to 0.7 units are now possible, less wobbling,  (settings for non standard bot: speed 0.77, speed-gain 0.14, kd 0.31 and 0.0 )   
+   
+  - ### Power Management
+  * To reduce the time lag of camera stream processing in the trt script all four CPUs are required 
+  * $sudo jetson_clocks is not sufficient to activate. $ sudo nvpmodel -m 0 for 10 W is required
+  * The preinstalled $sudo jtop can also be used to activate jetson clocks and CPUs etc..
+  * The time lag of display must be below <100 ms. With two CPUs at Max frequency the time lag is about < 2s which does not allow road following at an interesting speed
+  * example: ![bot-road following link for open bot08-2.mp4](https://github.com/tomMEM/Jetbot-Project/blob/master/Gif_Demo/bot08-2.mp4)
+
+## 4) Jetracer to Jetbot: data collection while driving with joystick control, build of TRT and live-run (speed gain fixed)
+  * only joystick control of bot and clickable display widget for coordinates
+  * allows to train for several categories
+  * the original jetracer roadfollowing script had this time lag, thus roadfollowing script for Jetbot has been used and modified to use jetracer script for jetbot
+  * in directory CategoryRoad_Jetracer_2_Jetbot, the interactive script is for collecting data for specific category (e.g. apex, bottle), need to indicate first cell
+  * the other script is to build the TRT model
+  * the live_demo_trt_jetracer_categoryModel_for_jetbotl.ipynb is for the free-run
+  * models with and without category can be used and run with the jetbot, in case they were created before with Jetbot roadfollowing scripts
+  * once category is detected - some to-do functions or behaviours could be added.
+  * these scripts do not support Jetracer car control, but could be added, time lag is much less
+
+## 5) Adjustments
+* High CPU usage by jetpot_stats.service before 25.08.2020, if jetbot PIOLED display is not installed or used, the new /NVIDIA-AI-IOT/jebot Repository includes the modified service
 ** Solution:
 ```
 #check if jetbot_stats.service is in the folder 
@@ -45,7 +125,16 @@ $ systemctl stop jetbot_stats #start service in case: systemctl start jebot_stat
 #remove from starting at boot up
 $ systemctl disable jetbot_stats
 #delete the file
-$ rm /etc/systemd/system/jetbot_stats.service
+$ sudo -H rm /etc/systemd/system/jetbot_stats.service
 
 #if the service is required again then follow using "SD card from scratch" point 10.
 ```
+* Camera settings in camera.py:
+```gst-inspect-1.0 nvarguscamerasrc```
+
+```return 'nvarguscamerasrc sensor-mode=4 awblock=false maxperf=true wbmode=1 exposuretimerange="37000000 37000000" aeantibanding=0 ispdigitalgainrange="8 8" gainrange="8 8" ! video/x-raw(memory:NVMM), width=%d, height=%d, format=(string)NV12, framerate=(fraction)%d/1 ! nvvidconv ! video/x-raw, width=(int)%d, height=(int)%d, format=(string)BGRx ! videoconvert ! appsink' % (```
+* modify camera.py in cd /jetbot/jetbot followed by cd ..  and then sudo python3 setup.py install to transfer the modified camera.py to build
+* sync notebooks after jetbot pull from home directory (not jetbot), from user nathanperkins issue 240
+
+```rsync -avz jetbot/notebooks/ ~/Notebooks```
+
