@@ -18,8 +18,9 @@ $git pull origin master --allow-unrelated-histories
 * [1) data_collection-Jetbot_Joystick.ipynb](#1-data_collection-jetbot_joystickipynb)
 * [2) Object recognition and driving towards it: live_demo-steering_tweak.ipynb](#2-object-recognition-and-driving-towards-it-live_demo-steering_tweakipynb)
 * [3) Road following: data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb](#3road-following-scripts-data_collection_joystick_roadfollowingipynb-and-live_demo_roadfollowing_targetdispipynb)
-* [4) RoadFollowing Jetracer to Jetbot: data collection while driving with joystick control, build TRT and live run](#4-jetracer-to-jetbot-data-collection-while-driving-with-joystick-control-build-of-trt-and-live-run-speed-gain-fixed)
-* [5) Adjustments](#5-adjustments)
+* [4) Jetbot Road following with Anti-collision](#4jetbot-road-following-with-anti-collision)
+* [5) RoadFollowing Jetracer to Jetbot: data collection while driving with joystick control, build TRT and live run](#5-jetracer-to-jetbot-data-collection-while-driving-with-joystick-control-build-of-trt-and-live-run-speed-gain-fixed)
+* [6) Adjustments](#6-adjustments)
 
 ## 1) data_collection-Jetbot_Joystick.ipynb
 
@@ -110,8 +111,22 @@ def steering(x ,y):
   * The preinstalled $sudo jtop can also be used to activate jetson clocks and CPUs etc..
   * The time lag of display must be below <100 ms. With two CPUs at Max frequency the time lag is about < 2s which does not allow road following at an interesting speed
   * example: ![bot-road following link for open bot08-2.mp4](https://github.com/tomMEM/Jetbot-Project/blob/master/Gif_Demo/bot08-2.mp4)
+  
+  
+## 4) Jetbot Road following with Anti-collision
+  * It requires two TRT models: one from the original collision_avoidance_RESENET19 script and road-following TRT
+  * The collision-avoidance model should be trained for one object (small bottle) on different backgrounds and lights as "blocked"
+  * Street with strips and color etc. needs to be well trained as "free"
+  * If live-demo collision is not blocking on street, but on object, then model is ready
+  * Road following script needs to be trained for street and strips as usual
+  * The object predication threshold can be adjusted with slider (Manu. threshold), and the time of stop also
+  * More complex behavior can be added as a function at corresponding place
+  * The Jetracer-2-Jetbot script is doing the same, only using one model with two categories, however, not yet with probability scores
 
-## 4) Jetracer to Jetbot: data collection while driving with joystick control, build of TRT and live-run (speed gain fixed)
+
+  
+
+## 5) Jetracer to Jetbot: data collection while driving with joystick control, build of TRT and live-run (speed gain fixed)
   * only joystick control of bot and clickable display widget for coordinates
   * allows to train for several categories
   * the original jetracer roadfollowing script had this time lag, thus roadfollowing script for Jetbot has been used and modified to use jetracer script for jetbot
@@ -122,7 +137,7 @@ def steering(x ,y):
   * once category is detected - some to-do functions or behaviours could be added.
   * these scripts do not support Jetracer car control, but could be added, time lag is much less
 
-## 5) Adjustments
+## 6) Adjustments
 * High CPU usage by jetpot_stats.service before 25.08.2020, if jetbot PIOLED display is not installed or used, the new /NVIDIA-AI-IOT/jebot Repository includes the modified service
 ** Solution:
 ```
