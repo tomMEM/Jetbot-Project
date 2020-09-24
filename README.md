@@ -114,7 +114,7 @@ def steering(x ,y):
   
   
 ## 4) Jetbot Road following with Anti-collision
-  * It requires two TRT models: one from the original collision_avoidance_RESENET18 script and road-following TRT
+  * It requires two TRT models: one from the original collision_avoidance_ResNet18 script and road-following TRT
   * The collision-avoidance model should be trained for one object (small bottle) on different backgrounds and lights as "blocked"
   * Street with strips and color etc. needs to be well trained as "free"
   * If live-demo collision is not blocking on street, but on object, then model is ready
