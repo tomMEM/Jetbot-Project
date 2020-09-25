@@ -1,13 +1,35 @@
+# Installation
+* the modified scripts are based on https://github.com/NVIDIA-AI-IOT/jetracer, thus first clone that repository and install as they describe
+* place the Jetracer-2-Jetbot script in the Jetracer/roadfollowing directory, otherwise it can not find utilis.py etc.
+* to try the Jetbot road following TRT model, copy it from the Jetbot/roadfollowing to Jetracer/roadfollowing
+* the Jetracer interactive script requires also JetCam and Clickable installation, as NVIDIA-AI-IOT/jetracer describe.
+
+# Installation of clickable gives sometimes problems
+* in case previous trials failed, delete the Clickablewidget directory
+* and then:
+```
+cd #reach home directory
+sudo apt-get install nodejs-dev node-gyp libssl1.0-dev
+sudo apt-get install npm #likely already installed, but it does no harm
+git clone https://github.com/jaybdub/jupyter_clickable_image_widget
+cd jupyter_clickable_image_widget
+git checkout no_typescript
+sudo python3 setup.py build #TB modified, takes a long time >30 min
+sudo pip3 install -e .
+sudo jupyter labextension install js
+sudo jupyter lab build
+```
 # How to use
 * interactive_regression_category_datacollection_jetracerforjetbot_joystick: for training and testing, either manually or using Joystick
 * live_demo_build_trt_jetracer_categoryModel_for_jetbot: convert the stored model to TRT to increase speed of inference
 * live_demo_trt_jetracer_categoryModel_for_jetbotl: Can use the model from jebot road following training or jetracer interactive training
 * live_demo_trt_jetracer_categoryModel_for_jetbot_with_stop_and_timeseries_Display: extended version of previous one with category behavior and time series display
+* last version of the category experiment: (trt_jetracer_categoryModel_for_jetbot_with_stop) is using probability for stop (but still not working nicely because of probability values to low)
 
 # General description
-* Category can be switched while driving
-* Change of category alters driving behavior of bot
-* Category might be also helpful to use a trained model for a fast switch of models in case of street light condition changes (e.g. night, day)
+* Category can be switched while driving, can be used for object following
+* goal: Change of category alters driving behavior of bot
+* Category might be also helpful to use a trained model for a fast switch of models in case of street light condition changes (e.g. night, day) - a more complex version, for experimenting
 * Prediction.value is used in one of the last scripts to change behavior in case a e.g. bottle is on the road (live_demo_trt_jetracer_categoryModel_for_jetbot_with_stop_and_timeseries_Display)
 
 # Road following 
