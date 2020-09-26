@@ -25,6 +25,8 @@ sudo jupyter lab build
 * live_demo_trt_jetracer_categoryModel_for_jetbotl: Can use the model from jebot road following training or jetracer interactive training
 * live_demo_trt_jetracer_categoryModel_for_jetbot_with_stop_and_timeseries_Display: extended version of previous one with category behavior and time series display
 * last version of the category experiment: (trt_jetracer_categoryModel_for_jetbot_with_stop) is using probability for stop (but still not working nicely because of probability values to low)
+* trt_jetracer_categoryModel_for_jetbot_with_collision_avoidance_of_jetbot.ipynb: it combines the Jetracer category road following with Jetbot collision_avoidance trained model "best_model_trt.pth"
+* please note: not tested yet with "best_model_resnet18.pth"
 
 # General description
 * Category can be switched while driving, can be used for object following
