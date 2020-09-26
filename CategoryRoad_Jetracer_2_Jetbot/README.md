@@ -22,10 +22,8 @@ sudo jupyter lab build
 # How to use
 * interactive_regression_category_datacollection_jetracerforjetbot_joystick: for training and testing, either manually or using Joystick
 * live_demo_build_trt_jetracer_categoryModel_for_jetbot: convert the stored model to TRT to increase speed of inference
-* live_demo_trt_jetracer_categoryModel_for_jetbotl: Can use the model from jebot road following training or jetracer interactive training
-* live_demo_trt_jetracer_categoryModel_for_jetbot_with_stop_and_timeseries_Display: extended version of previous one with category behavior and time series display
-* last version of the category experiment: (trt_jetracer_categoryModel_for_jetbot_with_stop) is using probability for stop (but still not working nicely because of probability values to low)
-* trt_jetracer_categoryModel_for_jetbot_with_collision_avoidance_of_jetbot.ipynb: it combines the Jetracer category road following with Jetbot collision_avoidance trained model "best_model_trt.pth"
+* (trt_jetracer_categoryModel_for_jetbot_with_stop) is using probability scores for stop (but still not working nicely because of probability values to low)
+* trt_jetracer_categoryModel_for_jetbot_with_collision_avoidance_of_jetbot.ipynb: it combines the Jetracer category road following with Jetbot collision_avoidance trained model "best_model_trt.pth" - if collision_avoidance model is not to aggresive, it stops if object (not specific one) is in the way
 * please note: not tested yet with "best_model_resnet18.pth"
 
 # General description
