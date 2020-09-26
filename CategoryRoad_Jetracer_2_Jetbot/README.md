@@ -22,15 +22,14 @@ sudo jupyter lab build
 # How to use
 * interactive_regression_category_datacollection_jetracerforjetbot_joystick: for training and testing, either manually or using Joystick
 * live_demo_build_trt_jetracer_categoryModel_for_jetbot: convert the stored model to TRT to increase speed of inference
-* (trt_jetracer_categoryModel_for_jetbot_with_stop) is using probability scores for stop (but still not working nicely because of probability values to low)
-* trt_jetracer_categoryModel_for_jetbot_with_collision_avoidance_of_jetbot.ipynb: it combines the Jetracer category road following with Jetbot collision_avoidance trained model "best_model_trt.pth" - if collision_avoidance model is not to aggresive, it stops if object (not specific one) is in the way
+* “trt_jetracer_categoryModel_for_jetbot_with_stop” is using probability scores for stop (but still not working nicely because of probability values to low)
+* trt_jetracer_categoryModel_for_jetbot_with_collision_avoidance_of_jetbot.ipynb: it combines the Jetracer category road following with Jetbot collision_avoidance trained model "best_model_trt.pth" - if collision_avoidance model is not to aggressive, it stops if object (not specific one) is in the way
 * please note: not tested yet with "best_model_resnet18.pth"
 
 # General description
-* Category can be switched while driving, can be used for object following
+* Category can be switched while driving, can be used for object following in case collision_avoidance model is not detecting it
 * goal: Change of category alters driving behavior of bot
 * Category might be also helpful to use a trained model for a fast switch of models in case of street light condition changes (e.g. night, day) - a more complex version, for experimenting
-* Prediction.value is used in one of the last scripts to change behavior in case a e.g. bottle is on the road (live_demo_trt_jetracer_categoryModel_for_jetbot_with_stop_and_timeseries_Display)
 
 # Road following 
 * Training seems to require less images
@@ -42,22 +41,14 @@ sudo jupyter lab build
 * Requires choice of category e.g. bottle
 
 # Category dependent behavior change
-* live_demo_trt_jetracer_categoryModel_for_jetbot_with_stop_and_timeseries_Display.ipynb
-* Script includes category dependent change of behavior (e.g. detection of bottle: backward driving for 10 to 20 frames)
-* Includes "jupyterplot" (need to be installed or deactivated with #) to display some time series values: it takes some time to initialize, but does not affect much the timing of the camera stream
+* trt_jetracer_categoryModel_for_jetbot_with_collision_avoidance_of_jetbot.ipynb
+* Script includes category dependent change of behavior (e.g. detection of bottle: stop for 10 to 20 frames)
 
 # Problems: 
-* complex behavior change without affecting Camera stream, and reduction of false positive detection of e.g. bottle.
-* using probability of  score.widgets for behavior change
+* reduction of false positive detection of e.g. bottle.
+* using probability of  score.widgets for behavior change, - does not work
 * implement threating, or traitlets to have actions outside the camera stream
 
 # Time lag, 
 * Sensitive to calculations within the camera stream
 * FPS is deceiving, observation of time lag more important to maintain performance and needs to be reduced.
-
-# Jupyterplot
-* can be installed for display of time series values
-
-
-
-
