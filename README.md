@@ -16,7 +16,7 @@ $git pull origin master --allow-unrelated-histories
 
 ## Contents
 * [1) data_collection-Jetbot_Joystick.ipynb](#1-data_collection-jetbot_joystickipynb)
-* [2) Object recognition and driving towards it: live_demo-steering_tweak_with_stop.ipynb](#2-object-recognition-and-driving-towards-it-live_demo-steering_tweak_with_stopipynb)
+* [2) Object recognition and driving towards it: live_demo-steering_tweak_with_stop.ipynb](#2-object-recognition-and-driving-towards-it-live_demo-steering_tweakipynb-and-trt_object_following_tweak_object_stopipynb)
 * [3) Road following: data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb](#3road-following-scripts-data_collection_joystick_roadfollowingipynb-and-live_demo_roadfollowing_targetdispipynb)
 * [4) Jetbot Road following with Anti-collision](#4-jetbot-road-following-with-anti-collision)
 * [5) RoadFollowing Jetracer to Jetbot: data collection while driving with joystick control, build TRT and live run](#5-jetracer-to-jetbot-data-collection-while-driving-with-joystick-control-build-of-trt-and-live-run-speed-gain-fixed)
