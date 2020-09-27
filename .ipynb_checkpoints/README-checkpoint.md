@@ -16,9 +16,9 @@ $git pull origin master --allow-unrelated-histories
 
 ## Contents
 * [1) data_collection-Jetbot_Joystick.ipynb](#1-data_collection-jetbot_joystickipynb)
-* [2) Object recognition and driving towards it: live_demo-steering_tweak.ipynb](#2-object-recognition-and-driving-towards-it-live_demo-steering_tweakipynb)
+* [2) Object recognition and driving towards it: live_demo-steering_tweak_with_stop.ipynb](#2-object-recognition-and-driving-towards-it-live_demo-steering_tweak_with_stopipynb)
 * [3) Road following: data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb](#3road-following-scripts-data_collection_joystick_roadfollowingipynb-and-live_demo_roadfollowing_targetdispipynb)
-* [4) Jetbot Road following with Anti-collision](#4jetbot-road-following-with-anti-collision)
+* [4) Jetbot Road following with Anti-collision](#4-jetbot-road-following-with-anti-collision)
 * [5) RoadFollowing Jetracer to Jetbot: data collection while driving with joystick control, build TRT and live run](#5-jetracer-to-jetbot-data-collection-while-driving-with-joystick-control-build-of-trt-and-live-run-speed-gain-fixed)
 * [6) Adjustments](#6-adjustments)
 
@@ -29,45 +29,12 @@ $git pull origin master --allow-unrelated-histories
 * transfer a notebook copy to Notebooks/collision_avoidance/ of the Jetbot SD image installation
 
 ### a) Script contains: 
-   * Joystick coordinate system transformation: based on user Pedro Werneck (https://electronics.stackexchange.com/questions/19669/algorithm-for-mixing-2-axis-analog-input-to-control-a-differential-motor-drive)
-   ```
-def steering(x ,y):
-	# convert to polar
-	r = math.hypot(x, y)
-	t = math.atan2(y, x)
-	# rotate by 45 degrees
-	t += math.pi /-4
-	# back to cartesian
-	left = r * math.cos(t)
-	right = r * math.sin(t)
-
-	# rescale the new coords
-	left = left * math.sqrt(2)
-	right = right * math.sqrt(2)
-
-	# clamp to Min/Max
-	scalefactor= speed_widget.value # or =0.5
-	left = max(-1*scalefactor, min(left, scalefactor))
-	right = max(-1*scalefactor, min(right, scalefactor))
-
-	#gamma correction for sensitivity of joystick or x value changes while turning : TB
-	gamma=turn_gain_widget.value #or =2 joystick and 1-40 for object targeting
-	if left <0 :
-    		left= -1* (((abs(left)/scalefactor)**(1/gamma))*scalefactor)
-	else:
-    		left= ((abs(left)/scalefactor)**(1/gamma))*scalefactor
-   
-	if right <0:
-    		right= -1*(((abs(right)/scalefactor)**(1/gamma))*scalefactor)
-	else:
-    		right= ((abs(right)/scalefactor)**(1/gamma))*scalefactor
-
-	return left, right
-```
-   * Gamma, Speed and motoradjustment sliders for tuning of the bot to run straight, values can be used for Object following script
-   * display of joystick's left and right engine values
-   * gamepad buttons for image aqcuisition (free, blocked)
-   * graphical buttons of the orginal script remain active and can be used
+   * Joystick coordinate system transformation: based on user Pedro Werneck (https://electronics.stackexchange.com/questions/19669/algorithm-for-mixing-2-axis-analog-input-to-control-a-differential-motor-drive)   
+   * Code in: def steering(x ,y):
+   * Gamma, Speed and motoradjustment sliders for tuning  the bot to drive straight, values can be also used for Object following script
+   * Display of joystick's left and right engine values
+   * Gamepad buttons for image aqcuisition (free, blocked)
+   * Graphical buttons of the orginal script remain active and can be used
 
 ### b) Issues:
    * Scale range for motors is -1 to 1
@@ -75,7 +42,16 @@ def steering(x ,y):
    * Gamepad: Xbox USB: joystick (controller.axes: x:0 (left-right), y:1 (forward-backward)
    * Image acquisition: button (5: free, 7: blocked)   *
  
- ## 2) Object recognition and driving towards it: live_demo-steering_tweak.ipynb
+## 2) Object recognition and driving towards it: live_demo-steering_tweak.ipynb and TRT_object_following_tweak_object_stop.ipynb
+
+ * TRT_object_following_tweak_object_stop.ipynb: is using "ssd_mobilenet_v2_coco.engine" for object detection and "best_model_trt.pth" for collision_avoidance
+ * The TRT script is a few frames per second faster than "live_demo-objectfollowing_tweak_object_stop.ipynb"
+ * The time limit is given by the "ssd_mobilenet_v2_coco.engine"
+ * Slider for threshold of object reaching: "object_stop_threshold" : 1 is bottom and 0 is top. When object reaches e.g. 0.9 then stop for few frames (slider is beside)
+ * If system cannot detect an object for 100 frames (fixed, no slider), then it switches to search mode using "collision_avoidance"
+ * Threshold of collision_avoidance is slider "Manu. bloc. threshold" : start with 0.9 (1.1 no collision_avoidance)
+ * Object index is activated by changing (up and down) the list
+
  
  ### Tweak driving towards an Object:
  	*Collision_avoidance is active in this script, and it is activated in case an object is not recognized within 5-10 seconds, the bot will go into search mode for an object 
@@ -114,7 +90,7 @@ def steering(x ,y):
   
   
 ## 4) Jetbot Road following with Anti-collision
-  * It requires two TRT models: one from the original collision_avoidance_RESENET19 script and road-following TRT
+  * It requires two TRT models: one from the original collision_avoidance_ResNet18 script and road-following TRT
   * The collision-avoidance model should be trained for one object (small bottle) on different backgrounds and lights as "blocked"
   * Street with strips and color etc. needs to be well trained as "free"
   * If live-demo collision is not blocking on street, but on object, then model is ready
