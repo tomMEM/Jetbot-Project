@@ -17,6 +17,20 @@
 * It takes some time and might need more than 500 images at the end
 * Augmentation could be added later to enhance specificity of the detection
 
+# Control of driving and behavior
+* the second to last category can be adjusted by pause time and detection threshold
+* it is manually by editing the list in the last main cell
+'''
+#----------------------------------------------------------------------------------------------------------------------------------------
+stop_time=[10,100,150,1] #pause number of about number of frames * 0.05 s
+second_category_threshold=[0.0,0.1,0.1,0.1] # threshold per category 
+
+#for category bottle give short time, so it will start to run once bottle is remove
+#for other category it will wait for some time, even the object has been removed
+#-------------------------------------------------------------------------------------------------------------------------
+'''
+* sliders under block threshold control pause activity - speed (0), turning, 
+
 # General description
 * Classes can be switched while driving and the threshold adjusted,
 * No behavior change so far (sliders below block modify behavior a bit)
