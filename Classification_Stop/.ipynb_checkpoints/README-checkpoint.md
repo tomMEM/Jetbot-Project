@@ -5,14 +5,14 @@
 * To prevent syslog build-up (can reach Max SD card space e.g. 35 GiB) deactivate rsyslog service with 
 
 """
-```
+'''
     $sudo service rsyslog stop
     $sudo systemctl disable rsyslog.service
     $cd /var/log
     $sudo rm syslog
     $sudo truncate –s 0 *
     $sudo systemctl status rsyslog  
-```
+'''
 
 """
 
@@ -51,25 +51,18 @@
 # Control of driving and behavior
 * the second to last category can be adjusted by pause time and detection threshold
 * it is manually by editing the list in the last main cell
+"""
 '''
-#----------------------------------------------------------------------------------------------------------------------------------------
-stop_time=[10,100,150,1] #pause number of about number of frames * 0.05 s
-second_category_threshold=[0.0,0.1,0.1,0.1] # threshold per category 
+----------------------------------------------------------------------------------------------------------------------------------------
+stop_time=[10,100,150,1] ----------------------------pause number of about number of frames * 0.05 s
+second_category_threshold=[0.0,0.1,0.1,0.1]----------threshold per category 
 
-#for category bottle give short time, so it will start to run once bottle is remove
-#for other category it will wait for some time, even the object has been removed
-#-------------------------------------------------------------------------------------------------------------------------
+for category bottle give short time, so it will start to run once bottle is remove
+for other category it will wait for some time, even the object has been removed
+-------------------------------------------------------------------------------------------------------------------------
 '''
+"""
 * sliders under block threshold control pause activity - speed (0), turning, 
-
-# General description
-* Classes can be switched while driving and the threshold adjusted,
-* No behavior change so far (sliders below block modify behavior a bit)
-* Classification itself is fast, very small time lag
-* But road following became a bit slow
-
-# Road following 
-* There is some additional time lag, so the driving might not so smooth (probably some memory issue)
 
 
 
