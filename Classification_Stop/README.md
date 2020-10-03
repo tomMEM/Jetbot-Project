@@ -1,4 +1,31 @@
+
+# How to run
+* It is recommended to run the script using Wi-Fi mode
+* Connection directly to HDMI display and keyboard/mouse requires too many resources and it might lead to system crashes or error messages that inflate syslog (check /var/log)
+* To prevent syslog build-up (can reach Max SD card space e.g. 35 GiB) deactivate rsyslog service with 
+
+"""
+```
+    $sudo service rsyslog stop
+    $sudo systemctl disable rsyslog.service
+    $cd /var/log
+    $sudo rm syslog
+    $sudo truncate –s 0 *
+    $sudo systemctl status rsyslog  
+```
+
+"""
+
+
+
+* Make sure using $top in the terminal window that sufficient resources are available (no zombie processes, about 20-38micros Cup, disk space (df) at least 20% free)
+* Only python, jupyter, nvargus should occupy CPU (10-90%)
+* Memory build up is also happen at the host computer, thus monitor host computer with Resource monitor (Windows) – mainly because of video stream rendering.
+* Edge is sometimes writing into /blob_storage – no idea how to prevent
+
+
 # Installation
+
 * The modified scripts are based on https://github.com/NVIDIA-AI-IOT/jetracer, thus first clone that repository and install as they describe
 * place the folder with all files in the Jetracer/roadfollowing directory (it might also work out of Jetbot-Project folder, in case jetracer and jetbot repositories were installed)
 * To try the Jetbot road following TRT model, copy it from the Jetbot/roadfollowing to this folder
