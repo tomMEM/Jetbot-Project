@@ -23,23 +23,23 @@
 
 # Installation
 
-* The modified scripts are based on https://github.com/NVIDIA-AI-IOT/jetracer, thus first clone that repository and install as they describe
+* The modified scripts are based on https://github.com/NVIDIA-AI-IOT/jetbot, thus first clone that repository and install as they describe
 * place the folder with all files in the Jetracer/roadfollowing directory (it might also work out of Jetbot-Project folder, in case jetracer and jetbot repositories were installed)
-* To try the Jetbot road following TRT model, copy it from the Jetbot/roadfollowing to this folder
-* The 1_datacollection... script is used to collect images for the four classes and to train a model, and also to test if objects are recognized
+* To try the Jetbot road following TRT model, copy it from the Jetbot/roadfollowing to this folder, which can be in Jetbot/roadfollowing/Classification_Stop
+* The 1_datacollection... script is used to collect images for the four classes (the first class needs to be background/free) and to train a model, and also to test if objects are recognized
 * The model will be saved as "classification_behavior_model.pth"
 * use 2_load_build_2_TRT_classification_model.ipynb to convert into TRT and save as "trt_classification_behavior_model.pth"
 * 3_roadfollowing_classification_behavior.ipynb is the live run of the classification and road following
 
 # 3 script
-* since the sliders are creating a time lag, they have been removed. They can be activated again by removing the #.
+* since the sliders are creating a time lag, they have been removed. They can be re-activated again by removing the #.
 * the thresholds and behaviour need to be adjusted at the last major cell in the two LISTs - the order of the values is according  Categories
 
 # Training of classes
 * First take background images (everything that should not be detected as object) - start with 40 images
-* collect for every class with the corresponding background some images e.g. 40
-* train with 5 epoch, evaluate, and live test
-* if in live test objects not recognized or wrongly, just take more images, and train, evaluate and test
+* Collect for every class with the corresponding background some images e.g. 40
+* Train with 5 epoch, evaluate, and live test
+* If in live test objects not recognized or wrongly, just take more images, and train, evaluate and test
 * Some classes might be easier to train then others
 * Because no distance check, train the objects in a distance to the camera that should give a block signal
 * It takes some time and might need more than 500 images at the end
