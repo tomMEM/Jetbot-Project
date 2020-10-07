@@ -16,7 +16,7 @@ $git pull origin master --allow-unrelated-histories
 
 ## Contents
 * [1) data_collection-Jetbot_Joystick.ipynb](#1-data_collection-jetbot_joystickipynb)
-* [2) Object recognition and driving towards it: live_demo-steering_tweak_with_stop.ipynb](#2-object-recognition-and-driving-towards-it-live_demo-steering_tweak_with_stopipynb)
+* [2) Object recognition and driving towards it: live_demo-steering_tweak_with_stop.ipynb](#2-object-recognition-and-driving-towards-it-live_demo-steering_tweakipynb-and-trt_object_following_tweak_object_stopipynb)
 * [3) Road following: data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb](#3road-following-scripts-data_collection_joystick_roadfollowingipynb-and-live_demo_roadfollowing_targetdispipynb)
 * [4) Jetbot Road following with Anti-collision](#4-jetbot-road-following-with-anti-collision)
 * [5) RoadFollowing Jetracer to Jetbot: data collection while driving with joystick control, build TRT and live run](#5-jetracer-to-jetbot-data-collection-while-driving-with-joystick-control-build-of-trt-and-live-run-speed-gain-fixed)
@@ -90,14 +90,20 @@ $git pull origin master --allow-unrelated-histories
   
   
 ## 4) Jetbot Road following with Anti-collision
-  * It requires two TRT models: one from the original collision_avoidance_ResNet18 script and road-following TRT
-  * The collision-avoidance model should be trained for one object (small bottle) on different backgrounds and lights as "blocked"
-  * Street with strips and color etc. needs to be well trained as "free"
-  * If live-demo collision is not blocking on street, but on object, then model is ready
-  * Road following script needs to be trained for street and strips as usual
-  * The object predication threshold can be adjusted with slider (Manu. threshold), and the time of stop also
-  * More complex behavior can be added as a function at corresponding place
-  * The Jetracer-2-Jetbot script is doing the same, only using one model with two categories, however, not yet with probability scores
+  * "trt-Jetbot-RoadFollowing_with_CollisionRESNet_TRT.ipynb"
+  * It requires two TRT models: one from the original "collision_avoidance_ResNet18" script and road-following TRT
+  * The collision-avoidance model can be trained for one object (small bottle) or several as "blocked" with "data_collection-collisionavoidance_Jetbot_Joystick.ipynb"
+  * Images of road with strips, and object background needs to be collected into "free"
+  * The number of background images ("free") can be high, and object (blocked) much less.
+  * To have the bot stop at a certain distance, images of the object need to be taken at similar distances to the camera.
+  * If the object is far away from the camera it will not be detected
+  * Data for the Road following model have to be created as usual ("data_collection_joystick_roadfollowing.ipynb")
+  * The models can be trained with "train_model_resnet18.ipynb" for collision avoidance and "train_model.ipynb" for road following
+  * Finally the previous models will be converted to TRT  
+  * The object predication threshold can be adjusted with slider (Manu. threshold), and the time of stop with the slider "Manu. time"
+  * More complex behavior could be added, for now it just pause for some time
+  * The Jetracer-2-Jetbot script is similar, however, categories could be added to switch during road following
+  * The folder "Classification_Stop_at_RoadFollowing" allows to define behavior according different objects while on the road. 
 
 
   
