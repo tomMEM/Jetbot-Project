@@ -1,8 +1,8 @@
 
 # How to run
-* It is recommended to run the script using Wi-Fi mode
-* Connection directly to HDMI display and keyboard/mouse requires too many resources and it might lead to system crashes or error messages that inflate syslog (check /var/log)
-* To prevent syslog build-up (can reach Max SD card space e.g. 35 GiB) deactivate rsyslog service with 
+* It is recommended to test the script using Wi-Fi mode or USB connection
+* A connection of the nano directly to HDMI display and keyboard/mouse requires too many resources and might lead to system crashes or error messages that inflate syslog (check /var/log)
+* However, to prevent syslog build-up (can reach Max SD card space e.g. 35 GiB) deactivate rsyslog service with 
 
 ```
     $sudo service rsyslog stop
@@ -15,11 +15,10 @@
 
 
 
-* Make sure using $top in the terminal window that sufficient resources are available (no zombie processes, about 20-38micros Cup, disk space (df) at least 20% free)
+* Make sure using $top in the terminal window that sufficient resources are available (no zombie processes, about 20-38micros Cp, disk space (df) at least 20% free)
 * Only python, jupyter, nvargus should occupy CPU (10-90%)
-* Memory build up is also happen at the host computer, thus monitor host computer with Resource monitor (Windows) – mainly because of video stream rendering.
-* Edge is sometimes writing into /blob_storage – no idea how to prevent
-
+* Memory build up is also happen at the host computer, thus monitor host computer with Resource monitor (Windows) – mainly because of video stream rendering (some json webpack troubles).
+* After a sudo apt-get update, sudo apt-get upgrade and using chrome as a browser the Memory build-up at the PC is less but still obvious
 
 # Installation
 
