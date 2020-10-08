@@ -1,7 +1,7 @@
 # _Jetbot-Project_
 *Jetbot-Project related script*
 
-* Sources: (https://github.com/NVIDIA-AI-IOT/jetbot)
+* Sources: (https://github.com/NVIDIA-AI-IOT/jetbot), (https://github.com/NVIDIA-AI-IOT/jetracer), nvdli-nano
 * Hardware: CSI camera, basic 2 Wheel Tracing Robot car chassis, Power Bank 5V 4A (20000 mAh OpponReno), DC Motor+Stepper Feather Wing, 3D Printed Power Bank holder, 64GB  SanDisk Extreme, nano
 * Clone with: git clone https://github.com/tomMEM/Jetbot-Project.git or git clone --depth=1 https://github.com/tomMEM/Jetbot-Project.git
 * update: 
@@ -68,20 +68,20 @@ $git pull origin master --allow-unrelated-histories
 
 
 ## 3)	Road Following: Scripts data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb
- -  ### Camera angle should be adjusted to picture only the street without the "horizon".
- -  ### It seems a large number of images is required, >1000, here I tried about 10000 images which took about 24 hours for the training script on the nano at MAX power
- -  ### Need to run the training road in both directions, every 100 to 400 images the environment was altered (door, windows, lights) and new objects were placed near the training course
- - ### The idea is to prevent the network to orientate on certain landmarks except road labels (two blue strips)
+ -  #### Camera angle should be adjusted to picture mainly the street without large parts of the "horizon".
+ -  #### It seems a large number of images is required, >1000, here I tried about 10000 images which took about 24 hours for the training script on the nano at MAX power
+ -  #### Need to run the training road in both directions, every 100 to 400 images the environment was altered (door, windows, lights) and new objects were placed near the training course
+ - #### The idea is to prevent the network to orientate on certain landmarks except road labels (two blue strips)
 
   * Joystick control to drive during data_collection_road_following
   * The xy coordinates from the driving Joystick (0,1) are taken to image names, however x and y sliders are still possible to use too
   * The image acquisition is initiated with the gamepad button 5 while driving - it can be several times per second especially during turns
   * The calculated xy coordinates can be observed in the camera display of the live_demo_road_following script
   
-  - ### The torch2Trt implementation from the Jetbot team greatly enhanced the performance of road following
+  - #### The torch2Trt implementation from the Jetbot team greatly enhanced the performance of road following
   * Speed up to 0.7 units are now possible, less wobbling,  (settings for non standard bot: speed 0.77, speed-gain 0.14, kd 0.31 and 0.0 )   
    
-  - ### Power Management
+  - #### Power Management
   * To reduce the time lag of camera stream processing in the trt script all four CPUs are required 
   * $sudo jetson_clocks is not sufficient to activate. $ sudo nvpmodel -m 0 for 10 W is required
   * The preinstalled $sudo jtop can also be used to activate jetson clocks and CPUs etc..
@@ -92,10 +92,21 @@ $git pull origin master --allow-unrelated-histories
 ## 4) Jetbot Road following with Anti-collision
   * "trt-Jetbot-RoadFollowing_with_CollisionRESNet_TRT.ipynb"
   * It requires two TRT models: one model build with "live_demo_resnet18_build_trt.ipynb " from collision_avoidance folder and another one build with "live_demo_build_trt.ipynb" from the roadfollowing folder of the original jetbot repository
+  ### For collision_avoidance Jetbot the steps are:
+ 	*a) data_collection
+ 	*b) train with train_model_resnet18.ipynb
+ 	*c) build with live_demo_resnet18_build_trt.ipynb (all scripts in original jetbot collision_avoidance folder)
+ 	*d) and finally add the TRT model from c to one of our roadfollowing with collision_avoidance folder and right name to the script
+  ### For the steering/roadfollowing Jetbot the steps are:
+ 	*a) data_collection.ipynb
+ 	*b) train_model.ipynb
+ 	*c) to convert to TRT live_demo_build_trt.ipynb
+ 	*d) add to our road following the model and the name to the script
+	
   * The collision-avoidance model can be trained for one object (small bottle) or several as "blocked" with "data_collection-collisionavoidance_Jetbot_Joystick.ipynb"
   * Images of road with strips, and object background needs to be collected into "free"
   * The number of background images ("free") can be high, and object (blocked) much less, if the object is a common one (cup, bottle etc).
-  * To have the bot stop at a certain distance, images of the object need to be taken at similar distances to the camera.
+  * To have the bot stop at a certain distance, images of the object need to be taken at similar distances to the camera
   * If the object is far away from the camera it might be not detected with a high probability score
   * Data for the Road following model have to be created as usual (e.g. "data_collection_joystick_roadfollowing.ipynb")
   * The models can be trained with "train_model_resnet18.ipynb" for collision avoidance and "train_model.ipynb" for road following
@@ -103,8 +114,7 @@ $git pull origin master --allow-unrelated-histories
   * The object predication threshold can be adjusted with slider (Manu. threshold), and the time of stop with the slider "Manu. time"
   * More complex behavior could be added, for now it just pause for some time
   * The Jetracer-2-Jetbot script is similar, however, categories could be added to switch during road following
-  * The folder "Classification_Stop_at_RoadFollowing" allows to define behavior according different objects while on the road, which is more functional. 
-  
+  * The folder "Classification_Stop_at_RoadFollowing" allows to define behavior according different objects while on the road, which is more functional.  
 
 ## 5) Jetracer to Jetbot: data collection while driving with joystick control, build of TRT and live-run (speed gain fixed)
   * only joystick control of bot and clickable display widget for coordinates
