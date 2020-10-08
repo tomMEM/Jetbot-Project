@@ -70,7 +70,7 @@ $git pull origin master --allow-unrelated-histories
 ## 3)	Road Following: Scripts data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb
  -  #### Camera angle should be adjusted to picture mainly the street without large parts of the "horizon".
  -  #### It seems a large number of images is required, >1000, here I tried about 10000 images which took about 24 hours for the training script on the nano at MAX power
- -  #### Need to run the training road in both directions, every 100 to 400 images the environment was altered (door, windows, lights) and new objects were placed near the training course
+ - #### Need to run the training road in both directions, every 100 to 400 images the environment was altered (door, windows, lights) and new objects were placed near the training course
  - #### The idea is to prevent the network to orientate on certain landmarks except road labels (two blue strips)
 
   * Joystick control to drive during data_collection_road_following
@@ -102,19 +102,17 @@ $git pull origin master --allow-unrelated-histories
  	*b) train_model.ipynb
  	*c) to convert to TRT live_demo_build_trt.ipynb
  	*d) add to our road following the model and the name to the script
-	
-  * The collision-avoidance model can be trained for one object (small bottle) or several as "blocked" with "data_collection-collisionavoidance_Jetbot_Joystick.ipynb"
+* The collision-avoidance model can be trained for one object (small bottle) or several as "blocked" with "data_collection-collisionavoidance_Jetbot_Joystick.ipynb"
   * Images of road with strips, and object background needs to be collected into "free"
   * The number of background images ("free") can be high, and object (blocked) much less, if the object is a common one (cup, bottle etc).
   * To have the bot stop at a certain distance, images of the object need to be taken at similar distances to the camera
   * If the object is far away from the camera it might be not detected with a high probability score
-  * Data for the Road following model have to be created as usual (e.g. "data_collection_joystick_roadfollowing.ipynb")
-  
+  * Data for the Road following model have to be created as usual (e.g. "data_collection_joystick_roadfollowing.ipynb")  
   * The object predication threshold can be adjusted with slider (Manu. threshold), and the time of stop with the slider "Manu. time"
   * More complex behavior could be added, for now it is just a pause for some time
   * The Jetracer-2-Jetbot script is similar, however, categories could be added to switch during road following
-  * The folder "Classification_Stop_at_RoadFollowing" allows to define behavior according different objects while on the road, which is more functional.  
-
+  * The folder "Classification_Stop_at_RoadFollowing" allows to define behavior according different objects while on the road, which is more functional
+  
 ## 5) Jetracer to Jetbot: data collection while driving with joystick control, build of TRT and live-run (speed gain fixed)
   * only joystick control of bot and clickable display widget for coordinates
   * allows to train for several categories
