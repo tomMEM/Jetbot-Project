@@ -109,10 +109,9 @@ $git pull origin master --allow-unrelated-histories
   * To have the bot stop at a certain distance, images of the object need to be taken at similar distances to the camera
   * If the object is far away from the camera it might be not detected with a high probability score
   * Data for the Road following model have to be created as usual (e.g. "data_collection_joystick_roadfollowing.ipynb")
-  * The models can be trained with "train_model_resnet18.ipynb" for collision avoidance and "train_model.ipynb" for road following
-  * Important: Finally the previous models need to be converted to TRT using the respective "build TRT" scripts
+  
   * The object predication threshold can be adjusted with slider (Manu. threshold), and the time of stop with the slider "Manu. time"
-  * More complex behavior could be added, for now it just pause for some time
+  * More complex behavior could be added, for now it is just a pause for some time
   * The Jetracer-2-Jetbot script is similar, however, categories could be added to switch during road following
   * The folder "Classification_Stop_at_RoadFollowing" allows to define behavior according different objects while on the road, which is more functional.  
 
