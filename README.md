@@ -91,21 +91,19 @@ $git pull origin master --allow-unrelated-histories
   
 ## 4) Jetbot Road following with Anti-collision
   * "trt-Jetbot-RoadFollowing_with_CollisionRESNet_TRT.ipynb"
-  * It requires two TRT models: one from the original "collision_avoidance_ResNet18" script and road-following TRT
+  * It requires two TRT models: one model build with "live_demo_resnet18_build_trt.ipynb " from collision_avoidance folder and another one build with "live_demo_build_trt.ipynb" from the roadfollowing folder of the original jetbot repository
   * The collision-avoidance model can be trained for one object (small bottle) or several as "blocked" with "data_collection-collisionavoidance_Jetbot_Joystick.ipynb"
   * Images of road with strips, and object background needs to be collected into "free"
-  * The number of background images ("free") can be high, and object (blocked) much less.
+  * The number of background images ("free") can be high, and object (blocked) much less, if the object is a common one (cup, bottle etc).
   * To have the bot stop at a certain distance, images of the object need to be taken at similar distances to the camera.
-  * If the object is far away from the camera it will not be detected
-  * Data for the Road following model have to be created as usual ("data_collection_joystick_roadfollowing.ipynb")
+  * If the object is far away from the camera it might be not detected with a high probability score
+  * Data for the Road following model have to be created as usual (e.g. "data_collection_joystick_roadfollowing.ipynb")
   * The models can be trained with "train_model_resnet18.ipynb" for collision avoidance and "train_model.ipynb" for road following
-  * Finally the previous models will be converted to TRT  
+  * Important: Finally the previous models need to be converted to TRT using the respective "build TRT" scripts
   * The object predication threshold can be adjusted with slider (Manu. threshold), and the time of stop with the slider "Manu. time"
   * More complex behavior could be added, for now it just pause for some time
   * The Jetracer-2-Jetbot script is similar, however, categories could be added to switch during road following
-  * The folder "Classification_Stop_at_RoadFollowing" allows to define behavior according different objects while on the road. 
-
-
+  * The folder "Classification_Stop_at_RoadFollowing" allows to define behavior according different objects while on the road, which is more functional. 
   
 
 ## 5) Jetracer to Jetbot: data collection while driving with joystick control, build of TRT and live-run (speed gain fixed)
