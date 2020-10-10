@@ -39,10 +39,8 @@
 * Collect for every class with the corresponding background some images e.g. 40
 * Train with 5 epoch, evaluate, and live test
 * If in live test objects not recognized or wrongly, just take more images, and train, evaluate and test
-* Some classes might be easier to train then others
-* Because no distance check, train the objects in a distance to the camera that should give a block signal
-* It takes some time and might need more than 500 images at the end
-* Augmentation could be added later to enhance specificity of the detection
+* Some classes might be easier to train than others
+* Since there is no distance check, the objects might be trained in a distance to the camera that should give a block signal
 
 # Control of driving and behavior
 * the second to last category can be adjusted by pause time and detection threshold
@@ -52,8 +50,11 @@
 ----------------------------------------------------------------------------------------------------------------------------------------
 stop_time=[10,100,150,1] ----------------------------pause: number of frames * ~ 0.05 s
 second_category_threshold=[0.0,0.4,0.7,0.4]----------threshold per category, less sensitivity at larger values Max 1 
-Background/free should be the first category---------Note!: less sensitivity with smaller values
+Background/free should be always the first category---------threshold is set by Manu thresh slider, if threshold has been reached the secondary thresholds are used to decide
+If one of the secondary classes is not well trained and always above 0.7-1, then set it to 1.1 in the second_category_threshold .e.g. [0.0,0.4,0.7,1.4], 
+This class is not used for decision - further training of the model, including data acquistion might be required to prevent false-positive detection
 
+e.g.
 for category bottle: give short time, so it will start to run once bottle is remove
 for other category it will wait for some time, even the object has been removed
 -------------------------------------------------------------------------------------------------------------------------
