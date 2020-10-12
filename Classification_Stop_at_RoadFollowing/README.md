@@ -24,16 +24,16 @@
 # Installation
 
 * The modified scripts are based on https://github.com/NVIDIA-AI-IOT/jetbot, thus first clone that repository and install as they describe
-* place the folder with all files in the Jetracer/roadfollowing directory (it might also work out of Jetbot-Project folder, in case jetracer and jetbot repositories were installed)
+* Place the folder with all files in the Jetracer/roadfollowing directory (it might also work out of Jetbot-Project folder, in case jetracer and jetbot repositories were installed)
 * To try the Jetbot road following TRT model, copy it from the Jetbot/roadfollowing to this folder, which can be in Jetbot/roadfollowing/Classification_Stop
 * The 1_datacollection... script is used to collect images for the four classes (the first class needs to be background/free) and to train a model, and also to test if objects are recognized
 * The model will be saved as "classification_behavior_model.pth"
-* use 2_load_build_2_TRT_classification_model.ipynb to convert into TRT and save as "trt_classification_behavior_model.pth"
+* Use 2_load_build_2_TRT_classification_model.ipynb to convert into TRT and save as "trt_classification_behavior_model.pth"
 * 3_roadfollowing_classification_behavior.ipynb is the live run of the classification and road following
 
 # 3 script
-* since the sliders are creating a time lag, they have been removed. They can be re-activated again by removing the #.
-* the thresholds and behaviour need to be adjusted at the last major cell in the two LISTs - the order of the values is according  Categories
+* Since the sliders are creating a time lag, they have been removed. They can be re-activated again by removing the #.
+* The thresholds and behaviour need to be adjusted at the last major cell in the two LISTs - the order of the values is according  Categories
 
 # Training of classes
 * First take background images (everything that should not be detected as object) - start with 40 images
@@ -42,10 +42,15 @@
 * If in live test objects not recognized or wrongly, just take more images, and train, evaluate and test
 * Some classes might be easier to train than others
 * Since there is no distance check, the objects might be trained in a distance to the camera that should give a block signal
+* Finally run the training for about 30 epochs at Max and sudo jetson_clocks settings of the nano - the training still might need some hours
+* It is recommended to run robot.stop(), and camera.stop() before to avoid memory build up by the video stream
+* At the end of the training session the model needs to be saved manually
 
 # Control of driving and behavior
-* the second to last category can be adjusted by pause time and detection threshold
-* it is manually by editing the list in the last main cell
+* The main threshold of detection is controlled by the Manu. Thresh. slider. In case the threshold has been reached the script checks the secondary class threshold.
+* The thresholds and pause times of the second to last category can be fine-tuned and adjusted manually by editing the two lists (see below) in the last main cell
+* Other sliders can be used to apply a backward drive speed and an angle in case an object has been detected
+
 
 ```
 ----------------------------------------------------------------------------------------------------------------------------------------
