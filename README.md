@@ -1,5 +1,5 @@
 # _Jetbot-Project_
-*Jetbot-Project related script*
+*Jetbot-Project related script* - Scripts are based and tested on SD image "jetbot_JP4.3_JL1.24_PT1.30_0115.img"
 
 * Sources: (https://github.com/NVIDIA-AI-IOT/jetbot), (https://github.com/NVIDIA-AI-IOT/jetracer), nvdli-nano
 * Hardware: CSI camera, basic 2 Wheel Tracing Robot car chassis, Power Bank 5V 4A (20000 mAh OpponReno), DC Motor+Stepper Feather Wing, 3D Printed Power Bank holder, 64GB  SanDisk Extreme, nano
@@ -69,8 +69,8 @@ $git pull origin master --allow-unrelated-histories
 
 ## 3)	Road Following: Scripts data_collection_joystick_roadfollowing.ipynb and live_demo_roadfollowing_targetdisp.ipynb
  -  #### Camera angle should be adjusted to picture mainly the street without large parts of the "horizon".
- -  #### It seems a large number of images is required, >1000, here I tried about 10000 images which took about 24 hours for the training script on the nano at MAX power
- - #### Need to run the training road in both directions, every 100 to 400 images the environment was altered (door, windows, lights) and new objects were placed near the training course
+ -  #### It seems a large number of images is required, >1000, which can take 24 hours for the training script on the nano at MAX power
+ - #### Need to collect images while driving in either direction; every 100 to 400 images the environment can be altered (door, windows, lights) and new objects could be placed near the training course
  - #### The idea is to prevent the network to orientate on certain landmarks except road labels (two blue strips)
 
   * Joystick control to drive during data_collection_road_following
