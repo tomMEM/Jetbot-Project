@@ -13,6 +13,9 @@ in case of troubles
 ```
 $git pull origin master --allow-unrelated-histories
 ```
+## Subfolders - driving behavior change according object
+ * Classification_Stop_at_RoadFollowing: Combines an extended anti-collision model (several objects) and roadfollowing model - efficient
+ * CategoryRoad_Jetracer_2_Jetbot: uses one model for object dependent behavior and roadfollowing – not efficient
 
 ## Contents
 * [1) data_collection-Jetbot_Joystick.ipynb](#1-data_collection-jetbot_joystickipynb)
