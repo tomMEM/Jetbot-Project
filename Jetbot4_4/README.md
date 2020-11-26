@@ -17,4 +17,19 @@ In case of modification attempts of the notebooks:
 7.	The build of the new container is going to download all libraries again, so it takes space and time.
 8.	Disable old container (jupyter lab in browser will close) and enable new container with ./enable $HOME (in cd jetbot/docker)
 
+## 3) Other ways to modify files within the docker container without rebuild of docker image
+Follow: https://phoenixnap.com/kb/how-to-commit-changes-to-docker-image
+for example: the Jetbot container is active and running
+then (not tested yet):
+in a SSH terminal try:  
+1. sudo docker images  #get ImageID
+2. docker exec -it e.g.ImageID /bin/bash
+* modify some docker container files
+* Commit Changes to Image
+3. exit
+4. sudo docker ps -a 
+5. sudo docker commit [CONTAINER_ID] [new_image_name] 
+* Example: sudo docker commit deddd39fa163 ubuntu-nmap 
+6. sudo docker images  
+7. run the new image as a docker container
 
