@@ -27,9 +27,9 @@
 3.	sudo reboot
 4.	in browser: to juptyer lab using MICRO USB to PC USB (192.168. 55.1:8888/lab?) or WIFI address (192.168.?.?:8888/lab?)
 In case of modification attempts of the notebooks:
-5.	in cd jetbot/jetbot or cd jetbot/notebooks you might try to change scripts.
-6.	To activate these changes rebuild those into a new container using local changes according tread #319, or same container #296 (jetbot issues)
-7.	The build of the new container is going to download all libraries again, so it takes space and time.
+5.	in cd jetbot/jetbot or cd jetbot/notebooks you might try to change scripts. As long only notebooks scripts are changed a rebuild is not required, only in case of jetbot/jetbot files.
+6.	To make jetbot/jetbot files permanent rebuild those into a new container using local changes according tread #319, or same container #296 (jetbot issues)
+7.	The build of the new container is going to download all libraries again, so it takes space and time, so better just use the approach described under headline 1.
 8.	Disable old container (jupyter lab in browser will close) and enable new container with ./enable $HOME (in cd jetbot/docker)
 
 ## 4) Other ways to modify files within the docker container without rebuild of docker image
