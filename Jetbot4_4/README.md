@@ -9,7 +9,7 @@
  * c) cp /workspace/jetbot/jetbot/robot.py /opt/jetbot/jetbot/robot.py
  * d) cd /opt/jetbot/
  * e) python3 setup.py install
- * Restart kernel and start e.g. 4Wheels_basic_motion.ipyn from /workspace/jetbot/notebooks/ in jupyter lab. Here you can also change the notebooks as you like, they do not need   to be copied to /opt/jupyter/.
+ * Restart kernel and start e.g. 4Wheels_basic_motion.ipyn from /workspace/jetbot/notebooks/ in jupyter lab. Here you can also change the notebooks as you like, they do not need   to be copied to /opt/jetbot/.
 
   *In case Docker container gets rebuild the changes remain in /workspace/jetbot/ but not in the docker container, thus modified files need to be copied back to opt/jetbot/...   followed with python3 setup.py install out of cd /opt/jetbot
 
