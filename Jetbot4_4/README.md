@@ -1,7 +1,7 @@
 # Collection of hints to use the DOCKER Jetbot4.4
 ## 1) Modifications of workspace file and copy to docker container /opt/jetbot/
  * Based on the SD image Jetbot4 Docker. 
- * The workspace is linked to the outside of the docker, so changes there will remain, in case the docker container is restarted from the docker image.
+ * The workspace is linked to the outside of the docker (home/jetbot), so changes there will remain, in case the docker container is restarted from the docker image.
  * After changes of files in /workspace/jetbot/.... :
  * a) Change files (e.g. motor and robot.py) under cd /workspace/jetbot/jetbot in jupyterlab, or copy my two files into this folder
  * b) from a terminal window in Jupyter lab copy the files to docker container in opt/jetbot/jetbot with:
