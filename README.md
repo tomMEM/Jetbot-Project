@@ -1,6 +1,8 @@
 # _Jetbot-Project_
 *Jetbot-Project related script* - Scripts are based and tested on SD image "jetbot_JP4.3_JL1.24_PT1.30_0115.img"
 
+*Scripts are still functional with SD image "jetbot-041_nano-4gb-jp441.img", however TRT models need to be rebuilt. Object following is not functional.
+
 * Sources: (https://github.com/NVIDIA-AI-IOT/jetbot), (https://github.com/NVIDIA-AI-IOT/jetracer), nvdli-nano
 * Hardware: CSI camera, basic 2 Wheel Tracing Robot car chassis, Power Bank 5V 4A (20000 mAh OpponReno), DC Motor+Stepper Feather Wing, 3D Printed Power Bank holder, 64GB  SanDisk Extreme, nano
 * Clone with: git clone https://github.com/tomMEM/Jetbot-Project.git or git clone --depth=1 https://github.com/tomMEM/Jetbot-Project.git
