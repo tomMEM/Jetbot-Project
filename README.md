@@ -154,9 +154,9 @@ $ sudo -H rm /etc/systemd/system/jetbot_stats.service
 
 ```rsync -avz jetbot/notebooks/ ~/Notebooks```
 
-* PC as hotspot running a proxy:
- * nmcli d wifi list, sudo nmcli d wifi connect [PC_SSID] password [??]
- * Error: gnutls_handshake() failed: The TLS connection was non-properly terminated.
- * git config --global http.proxy ""
- * git config --get-regexp http.*
- * git pull origin master --allow-unrelated-historie
+### PC as hotspot running a proxy:
+  * nmcli d wifi list, sudo nmcli d wifi connect [PC_SSID] password [??]
+  * Error: gnutls_handshake() failed: The TLS connection was non-properly terminated.
+  * git config --global http.proxy ""
+  * git config --get-regexp http.*
+  * git pull origin master --allow-unrelated-historie
