@@ -95,7 +95,9 @@ $git pull origin master --allow-unrelated-histories
   
   
 ## 4) Jetbot Road following with Anti-collision
-  * "trt-Jetbot-RoadFollowing_with_CollisionRESNet_TRT.ipynb"
+## A road_following with Object_specific stop/collision avoidance script can be found in the folder "Classification_Stop_at_RoadFollowing"
+
+  * For "trt-Jetbot-RoadFollowing_with_CollisionRESNet_TRT.ipynb" the following steps are required
   * It requires two TRT models: one model build with "live_demo_resnet18_build_trt.ipynb " from collision_avoidance folder and another one build with "live_demo_build_trt.ipynb" from the roadfollowing folder of the original jetbot repository
   ### For collision_avoidance Jetbot the steps are:
  	*a) data_collection
