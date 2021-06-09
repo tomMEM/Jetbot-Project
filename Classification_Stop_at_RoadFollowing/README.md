@@ -1,6 +1,7 @@
-# Script is for Jetbot
+# Scripts are for Jetbot to allow road following and object specific actions (Stop, backward drive, time settings)
+### * A similar approach can be found in "https://github.com/abuelgasimsaadeldin/Jetbot-Road-Following-and-Collision-Avoidance" 
 
-# How to run
+## General notes:
 * A connection of the nano directly to HDMI display and keyboard/mouse requires too many resources and might lead to system crashes or error messages that inflate syslog (check /var/log)
 * However, to prevent syslog build-up at the nano (can reach Max SD card space e.g. 35 GiB) deactivate rsyslog service with 
 
@@ -20,7 +21,7 @@
 * Memory build up is also happen at the host computer, thus monitor host computer with Resource monitor (Windows) – mainly because of video stream rendering (some json webpack troubles).
 * After a sudo apt-get update, sudo apt-get dist-upgrade and using chrome as a browser the Memory build-up at the PC is less but still obvious
 
-# Installation
+# Installation of the scripts
 
 * The modified scripts are based on https://github.com/NVIDIA-AI-IOT/jetbot, thus first clone that repository and install as they describe
 * Place the folder with all files in the Jetracer/roadfollowing directory (it might also work out of Jetbot-Project folder, in case jetracer and jetbot repositories were installed)
