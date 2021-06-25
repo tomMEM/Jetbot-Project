@@ -163,3 +163,16 @@ $ sudo -H rm /etc/systemd/system/jetbot_stats.service
   * git config --global https.proxy ""
   * git config --get-regexp http.*
   * git pull origin master --allow-unrelated-historie
+
+### jupyter_clickable_widget
+  * from: https://github.com/jaybdub/jupyter_clickable_image_widget/issues/3
+
+  * Jetpack 4.5.1 branch, needs to be updated to v0.1 :
+```
+git clone https://github.com/jaybdub/jupyter_clickable_image_widget
+cd jupyter_clickable_image_widget
+git checkout tags/v0.1
+sudo -H pip3 install -e .
+sudo jupyter labextension install js
+sudo jupyter lab build
+```
